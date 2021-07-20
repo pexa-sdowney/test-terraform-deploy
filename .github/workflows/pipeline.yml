@@ -9,6 +9,11 @@ jobs:
 
   job-2:
     needs: Explore-GitHub-Actions
+    inputs:
+      logLevel:
+        description: 'Log level'     
+        required: true
+        default: 'warning'
     runs-on: ubuntu-latest
     steps:
       - run: mkdir folder
