@@ -6,8 +6,10 @@ jobs:
   prereqs:
     runs-on: macos-latest
     steps:
-      - run: brew install terraform
-      - run: terraform -chdir=/terraform plan
+      # - run: brew install terraform
+      # - run: terraform -chdir=/terraform plan
+        - run: ls
+        - run: pwd
 
   # job-2:
   #   needs: Explore-GitHub-Actions
