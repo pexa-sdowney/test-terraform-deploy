@@ -25,3 +25,11 @@ variable "aws_access_key" {
 variable "aws_secret_key" {
   description = "The AWS secret key."
 }
+
+terraform {
+  backend "s3" {
+    bucket = "state.samdowney.com"
+    key    = "states/yt-archiver"
+    region = "ap-southeast-2"
+  }
+}
