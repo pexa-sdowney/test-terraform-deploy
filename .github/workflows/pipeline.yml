@@ -17,48 +17,27 @@ jobs:
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
       run:
-        shell: bash
- 
+        working-directory: ${{ env.tf_actions_working_dir }}
     steps:
-    # Checkout the repository to the GitHub Actions runner
-    - name: Checkout
-      uses: actions/checkout@v2
- 
-    - name: 'Terraform Format'
-      uses: hashicorp/terraform-github-actions@master
+    - uses: actions/checkout@v2
+    - uses: hashicorp/setup-terraform@v1
       with:
-        tf_actions_version: 1.0.2
-        tf_actions_subcommand: 'fmt'
-        tf_actions_working_dir: "./terraform"
-         
-    - name: 'Terraform Init'
-      uses: hashicorp/terraform-github-actions@master
-      with:
-        tf_actions_version: 1.0.2
-        tf_actions_subcommand: 'init'
-        tf_actions_working_dir: "./terraform"
-        args: '-backend-config="token=${{ secrets.TF_TOKEN }}" -backend-config="organization=samdowney"'
+        cli_config_credentials_token: ${{ secrets.TF_TOKEN }}
 
- 
-    - name: 'Terraform Validate'
-      uses: hashicorp/terraform-github-actions@master
-      with:
-        tf_actions_version: 1.0.2
-        tf_actions_subcommand: 'validate'
-        tf_actions_working_dir: "./terraform"
-         
-    - name: 'Terraform Plan'
-      uses: hashicorp/terraform-github-actions@master
-      with:
-        tf_actions_version: 1.0.2
-        tf_actions_subcommand: 'plan'
-        tf_actions_working_dir: "terraform"
-        args: '-backend-config="token=${{ secrets.TF_TOKEN }}" -backend-config="organization=samdowney"'
- 
-    # - name: Terraform Apply
-    #   if: github.ref == 'refs/heads/main'
-    #   uses: hashicorp/terraform-github-actions@master
-    #   with:
-    #     tf_actions_version: 1.0.2
-    #     tf_actions_subcommand: 'applya'
-    #     tf_actions_working_dir: "./terraform"
+    - name: Terraform fmt
+      id: fmt
+      run: terraform fmt -check
+      continue-on-error: true
+
+    - name: Terraform Init
+      id: init
+      run: terraform init
+
+    - name: Terraform Validate
+      id: validate
+      run: terraform validate -no-color
+
+    - name: Terraform Plan
+      id: plan
+      run: terraform plan -no-color
+      continue-on-error: true
