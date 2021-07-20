@@ -7,7 +7,7 @@ jobs:
     runs-on: macos-latest
     steps:
       - run: brew install terraform
-      - run: terraform -chdir=terraform/ plan
+      - run: terraform -chdir=/terraform plan
 
   # job-2:
   #   needs: Explore-GitHub-Actions
