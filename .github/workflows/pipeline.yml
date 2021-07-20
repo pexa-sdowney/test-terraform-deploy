@@ -1,26 +1,37 @@
-name: GitHub Actions Demo
-on: [push]
-env:
-    URL: Available for all jobs in this workflow
+name: 'Terraform'
+ 
+on:
+  push:
+    branches:
+    - main
+  pull_request:
+ 
 jobs:
-  prereqs:
-    runs-on: macos-latest
+  terraform:
+    name: 'Terraform'
+    env:
+      ENV_EXAMPLE: "TEST"
+    runs-on: ubuntu-latest
+    environment: test
+ 
+    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+    defaults:
+      run:
+        shell: bash
+ 
     steps:
-      # - run: brew install terraform
-      # - run: terraform -chdir=/terraform plan
-        - run: ls
-        - run: pwd
-
-  # job-2:
-  #   needs: Explore-GitHub-Actions
-  #   inputs:
-  #     logLevel:
-  #       description: 'Log level'     
-  #       required: true
-  #       default: 'warning'
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - run: mkdir folder
-  #     - run: cd folder
-  #     - run: touch file
-  #     - run: ls
+    # Checkout the repository to the GitHub Actions runner
+    - name: Checkout
+      uses: actions/checkout@v2
+ 
+    - name: 'Terraform Format'
+      uses: hashicorp/terraform-github-actions@master
+      with:
+        tf_actions_subcommand: 'fmt'
+        tf_actions_working_dir: "./terraform"
+         
+    - name: 'Terraform Init'
+      uses: hashicorp/terraform-github-actions@master
+      with:
+        tf_actions_subcommand: 'init'
+        tf_actions_working_dir: "./terraform"
