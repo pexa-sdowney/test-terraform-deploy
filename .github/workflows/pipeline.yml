@@ -7,7 +7,7 @@ jobs:
     runs-on: macos-latest
     steps:
       - run: brew install terraform
-      - run: cd terraform && terraform plan
+      - run: cd /terraform && terraform plan
 
   # job-2:
   #   needs: Explore-GitHub-Actions
