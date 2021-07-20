@@ -1,5 +1,5 @@
-resource "aws_ecs_task_definition" "ts_monitor" {
-  family                   = "ts-monitor"
+resource "aws_ecs_task_definition" "yt_archiver" {
+  family                   = "yt-archiver"
   task_role_arn            = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/ecsTaskExecutionRole"
   execution_role_arn       = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/ecsTaskExecutionRole"
   network_mode             = "awsvpc"
