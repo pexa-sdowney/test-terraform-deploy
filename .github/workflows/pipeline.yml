@@ -52,7 +52,7 @@ jobs:
       with:
         tf_actions_version: 1.0.2
         tf_actions_subcommand: 'plan'
-        tf_actions_working_dir: "./terraform"
+        tf_actions_working_dir: "terraform"
         args: '-backend-config="token=${{ secrets.TF_TOKEN }}" -backend-config="organization=samdowney"'
  
     # - name: Terraform Apply
