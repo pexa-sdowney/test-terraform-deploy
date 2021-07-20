@@ -29,16 +29,16 @@ jobs:
 
     - name: Terraform Fmt
       id: fmt
-      run: terraform fmt -check -diff
+      run: terraform -chdir=terraform/ fmt -check -diff
       continue-on-error: true
 
     - name: Terraform Init
       id: init
-      run: terraform init
+      run: terraform -chdir=terraform/ init
 
     - name: Terraform Validate
       id: validate
-      run: terraform validate -no-color
+      run: terraform -chdir=terraform/ validate -no-color
       continue-on-error: true
 
     - name: Terraform Plan
