@@ -1,12 +1,12 @@
-# terraform {
-#   backend "remote" {
-#     organization = "samdowney"
+terraform {
+  backend "remote" {
+    organization = "samdowney"
 
-#     workspaces {
-#       name = "microservices"
-#     }
-#   }
-# }
+    workspaces {
+      name = "microservices"
+    }
+  }
+}
 
 provider "aws" {
   access_key = var.aws_access_key
@@ -26,10 +26,10 @@ variable "aws_secret_key" {
   description = "The AWS secret key."
 }
 
-terraform {
-  backend "s3" {
-    bucket = "state.samdowney.com"
-    key    = "states/yt-archiver"
-    region = "ap-southeast-2"
-  }
-}
+# terraform {
+#   backend "s3" {
+#     bucket = "state.samdowney.com"
+#     key    = "states/yt-archiver"
+#     region = "ap-southeast-2"
+#   }
+# }

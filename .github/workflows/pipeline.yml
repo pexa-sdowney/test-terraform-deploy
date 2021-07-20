@@ -35,8 +35,10 @@ jobs:
       uses: hashicorp/terraform-github-actions@master
       with:
         tf_actions_version: 1.0.2
-        tf_actions_subcommand: 'init -backend-config="AWS_ACCESS_KEY_ID=AWS_ACCESS_KEY_ID -backend-config="AWS_SECRET_ACCESS_KEY=AWS_SECRET_ACCESS_KEY'
+        tf_actions_subcommand: 'init'
         tf_actions_working_dir: "./terraform"
+        args: '-backend-config="token=${{ secrets.TF_TOKEN }}" -backend-config="organization=samdowney"'
+
  
     - name: 'Terraform Validate'
       uses: hashicorp/terraform-github-actions@master
