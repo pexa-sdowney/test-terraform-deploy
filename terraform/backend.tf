@@ -28,8 +28,8 @@ variable "aws_secret_key" {
 
 terraform {
   backend "s3" {
-    bucket     = "state.samdowney.com"
-    key        = "states/yt-archiver"
-    region     = "ap-southeast-2"
+    bucket = "state.samdowney.com"
+    key    = "states/yt-archiver"
+    region = "ap-southeast-2"
   }
 }
