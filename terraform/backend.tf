@@ -1,12 +1,12 @@
-terraform {
-  backend "remote" {
-    organization = "samdowney"
+# terraform {
+#   backend "remote" {
+#     organization = "samdowney"
 
-    workspaces {
-      name = "microservices"
-    }
-  }
-}
+#     workspaces {
+#       name = "microservices"
+#     }
+#   }
+# }
 
 provider "aws" {
   access_key = var.aws_access_key
