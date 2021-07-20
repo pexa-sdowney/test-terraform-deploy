@@ -31,7 +31,5 @@ terraform {
     bucket     = "state.samdowney.com"
     key        = "states/yt-archiver"
     region     = "ap-southeast-2"
-    access_key = var.aws_access_key
-    secret_key = var.aws_access_key
   }
 }
