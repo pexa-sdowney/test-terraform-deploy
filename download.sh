@@ -1,6 +1,11 @@
 #!/bin/sh
 
-youtube-dl $1 -o "youtube-%(title)s-%(id)s.%(ext)s" --restrict-filenames
+# if [ -z  ${1} ]; then export URL=$1
+# else
+# export URL=$VIDEO_URL
+# fi
+
+youtube-dl $VIDEO_URL -o "youtube-%(title)s-%(id)s.%(ext)s" --restrict-filenames
 
 export NAME=$(ls youtube*)
 
