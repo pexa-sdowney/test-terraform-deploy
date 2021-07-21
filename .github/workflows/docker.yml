@@ -13,22 +13,13 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@master
 
-    - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v1
-      with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: ap-southeast-2
-
-    - name: Login to Amazon ECR
-      id: login-ecr
-      uses: aws-actions/amazon-ecr-login@v1
-
     - name: Build, tag, and push image to Amazon ECR
       env:
         ECR_REGISTRY: public.ecr.aws/g4k5i3z6/yt-archiver
         ECR_IMAGE: yt-archiver
         IMAGE_TAG: latest 
       run: |
-        docker build -t $ECR_REGISTRY .
-        docker push $ECR_REGISTRY:$IMAGE_TAG
+        aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/g4k5i3z6
+        docker build -t yt-archiver .
+        docker tag yt-archiver:latest public.ecr.aws/g4k5i3z6/yt-archiver:latest
+        docker push public.ecr.aws/g4k5i3z6/yt-archiver:latest
