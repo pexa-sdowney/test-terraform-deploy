@@ -27,8 +27,8 @@ jobs:
     - name: Build, tag, and push image to Amazon ECR
       env:
         ECR_REGISTRY: public.ecr.aws/g4k5i3z6/yt-archiver
-        ECR_REPOSITORY: yt-archiver
-        IMAGE_TAG: ${{ github.sha }}
+        ECR_IMAGE: yt-archiver
+        IMAGE_TAG: latest 
       run: |
-        docker build -t public.ecr.aws/g4k5i3z6/yt-archiver:latest .
-        docker push public.ecr.aws/g4k5i3z6/yt-archiver:latest
+        docker build -t $ECR_REGISTRY .
+        docker push $ECR_REGISTRY:$IMAGE_TAG
