@@ -5,7 +5,7 @@
 # export URL=$VIDEO_URL
 # fi
 
-youtube-dl $VIDEO_URL -o "youtube-%(title)s-%(id)s.%(ext)s" --restrict-filenames
+youtube-dl "${VIDEO_URL}" -o "youtube-%(title)s-%(id)s.%(ext)s" --restrict-filenames
 
 export NAME=$(ls youtube*)
 

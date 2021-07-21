@@ -11,7 +11,15 @@ resource "aws_ecs_task_definition" "yt_archiver" {
   [
     {
       "image": "public.ecr.aws/g4k5i3z6/yt-archiver",
-      "name": "yt-archiver"
+      "name": "yt-archiver",
+      "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "fargate",
+                    "awslogs-region": "ap-southeast-2",
+                    "awslogs-stream-prefix": "ecs-fargate-yt-archiver",
+                    "awslogs-create-group": "true"
+                }
     }
   ]
   EOF
