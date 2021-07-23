@@ -21,9 +21,15 @@ resource "aws_ecs_task_definition" "yt_archiver" {
               "awslogs-create-group": "true"
                 }
     },
+    "mountPoints": [
+                {
+                    "sourceVolume": "efs",
+                    "containerPath": "/"
+                }
+            ],
     "volumes": [
         {
-            "name": "myEfsVolume",
+            "name": "efs",
             "efsVolumeConfiguration": {
                 "fileSystemId": "fs-88181eb0",
                 "rootDirectory": "/downloads"
