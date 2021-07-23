@@ -12,7 +12,7 @@ resource "aws_ecs_task_definition" "yt_archiver" {
 
     efs_volume_configuration {
       file_system_id = "fs-88181eb0"
-      root_directory = "/downloads"
+      #root_directory = "/downloads"
       # transit_encryption      = "ENABLED"
       # transit_encryption_port = 2999
       # authorization_config {
