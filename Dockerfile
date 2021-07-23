@@ -1,9 +1,7 @@
-FROM amazonlinux
+FROM alpine
 
-RUN yum update -y
-RUN yum install amazon-efs-utils -y
-
-RUN curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl && chmod +x /usr/local/bin/youtube-dl
+RUN apk update
+RUN apk add youtube-dl aws-cli ffmpeg
 
 COPY download.sh .
 RUN chmod +x download.sh
