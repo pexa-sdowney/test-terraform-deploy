@@ -7,6 +7,13 @@ resource "aws_ecs_task_definition" "yt_archiver" {
   memory                   = "512"
   requires_compatibilities = ["FARGATE"]
 
+   volumes = [{
+      name = "efs"
+      efsVolumeConfiguration = {
+         fileSystemId = "fs-88181eb0"
+      }
+ }]
+
   container_definitions = <<EOF
   [
     {
@@ -23,23 +30,21 @@ resource "aws_ecs_task_definition" "yt_archiver" {
     },
     "mountPoints": [
                 {
-                    "sourceVolume": "efs-test",
+                    "sourceVolume": "efs",
                     "containerPath": "/"
                 }
-            ],
-    "volumes": [
-        {
-            "name": "efs-test",
-            "efsVolumeConfiguration": {
-                "fileSystemId": "fs-88181eb0",
-                "rootDirectory": "/downloads"
-            }
-        }
-    ]
-
+            ]
     }
   ]
   EOF
 }
+
+# resource "aws_efs_file_system" "foo" {
+#   creation_token = "my-product"
+
+#   tags = {
+#     Name = "MyProduct"
+#   }
+# }
 
 data "aws_caller_identity" "current" {}
