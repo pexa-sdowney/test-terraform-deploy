@@ -3,6 +3,9 @@ name: Docker
 on:
   pull_request:
   workflow_dispatch:
+  push:
+    paths:
+      - 'Dockerfile'
   
 jobs:
   terraform-actions:
