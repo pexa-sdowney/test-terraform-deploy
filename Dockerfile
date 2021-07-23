@@ -7,6 +7,7 @@ COPY download.sh .
 RUN chmod +x download.sh
 
 ENV VIDEO_URL=
+ENV FOLDER=
 ENV STORAGE_CLASS=
 #Storage class needs to be passed in fully (--storage class GLACIER)
 
