@@ -1,9 +1,11 @@
 name: Terraform
 
 on:
-  push:
   pull_request:
   workflow_dispatch:
+  push:
+    paths-ignore:
+      - 'Dockerfile'
 
 jobs:
   terraform-actions:
