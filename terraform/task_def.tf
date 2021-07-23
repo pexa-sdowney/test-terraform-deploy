@@ -8,28 +8,32 @@ resource "aws_ecs_task_definition" "yt_archiver" {
   requires_compatibilities = ["FARGATE"]
 
   container_definitions = <<EOF
-  [{
-  	"image": "public.ecr.aws/g4k5i3z6/yt-archiver",
-  	"name": "yt-archiver",
-  	"logConfiguration": {
-  		"logDriver": "awslogs",
-  		"options": {
-  			"awslogs-group": "fargate",
-  			"awslogs-region": "ap-southeast-2",
-  			"awslogs-stream-prefix": "ecs-fargate-yt-archiver",
-  			"awslogs-create-group": "true"
-  		}
-  	},
-  	"volumes": [{
-  		"name": "efs",
-  		"efsVolumeConfiguration": {
-  			"fileSystemId": "fs-88181eb0",
-  			"rootDirectory": "/downloads",
-  		}
-  	}]
+  [
+    {
+      "image": "public.ecr.aws/g4k5i3z6/yt-archiver",
+      "name": "yt-archiver",
+      "logConfiguration": {
+          "logDriver": "awslogs",
+          "options": {
+              "awslogs-group": "fargate",
+              "awslogs-region": "ap-southeast-2",
+              "awslogs-stream-prefix": "ecs-fargate-yt-archiver",
+              "awslogs-create-group": "true"
+                }
+    },
+    "volumes": [
+        {
+            "name": "myEfsVolume",
+            "efsVolumeConfiguration": {
+                "fileSystemId": "fs-88181eb0",
+                "rootDirectory": "/downloads"
+            }
+        }
+    ]
 
-  }]
+    }
+  ]
   EOF
-  }
+}
 
 data "aws_caller_identity" "current" {}
