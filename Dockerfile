@@ -1,7 +1,9 @@
-FROM ubuntu
+FROM amazonlinux
 
-RUN apt update
-RUN DEBIAN_FRONTEND=noninteractive apt install youtube-dl awscli ffmpeg nfs-common -y
+RUN yum update -y
+RUN yum install amazon-efs-utils -y
+
+RUN curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl && chmod +x /usr/local/bin/youtube-dl
 
 COPY download.sh .
 RUN chmod +x download.sh
