@@ -1,7 +1,7 @@
-FROM ubuntu
+FROM alpine
 
-RUN apt update
-RUN apt install youtube-dl aws-cli ffmpeg -y
+RUN apk update
+RUN apk add youtube-dl aws-cli ffmpeg
 
 COPY download.sh .
 RUN chmod +x download.sh
