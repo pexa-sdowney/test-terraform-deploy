@@ -23,13 +23,13 @@ resource "aws_ecs_task_definition" "yt_archiver" {
     },
     "mountPoints": [
                 {
-                    "sourceVolume": "efs",
+                    "sourceVolume": "efs-test",
                     "containerPath": "/"
                 }
             ],
     "volumes": [
         {
-            "name": "efs",
+            "name": "efs-test",
             "efsVolumeConfiguration": {
                 "fileSystemId": "fs-88181eb0",
                 "rootDirectory": "/downloads"
