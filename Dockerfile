@@ -1,7 +1,7 @@
 FROM ubuntu
 
 RUN apt update
-RUN apt install youtube-dl aws-cli ffmpeg nfs-common -y
+RUN apt install youtube-dl awscli ffmpeg nfs-common -y
 
 COPY download.sh .
 RUN chmod +x download.sh
