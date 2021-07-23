@@ -7,20 +7,20 @@ resource "aws_ecs_task_definition" "yt_archiver" {
   memory                   = "512"
   requires_compatibilities = ["FARGATE"]
 
-  volume {
-    name = "efs"
+  # volume {
+  #   name = "efs"
 
-    efs_volume_configuration {
-      file_system_id = "fs-88181eb0"
-      #root_directory = "/downloads"
-      # transit_encryption      = "ENABLED"
-      # transit_encryption_port = 2999
-      # authorization_config {
-      #   access_point_id = aws_efs_access_point.test.id
-      #   iam             = "ENABLED"
-      # }
-    }
-  }
+  #   efs_volume_configuration {
+  #     file_system_id = "fs-88181eb0"
+  #     #root_directory = "/downloads"
+  #     # transit_encryption      = "ENABLED"
+  #     # transit_encryption_port = 2999
+  #     # authorization_config {
+  #     #   access_point_id = aws_efs_access_point.test.id
+  #     #   iam             = "ENABLED"
+  #     # }
+  #   }
+  # }
   container_definitions = <<EOF
   [
     {
@@ -34,13 +34,7 @@ resource "aws_ecs_task_definition" "yt_archiver" {
               "awslogs-stream-prefix": "ecs-fargate-yt-archiver",
               "awslogs-create-group": "true"
                 }
-    },
-    "mountPoints": [
-                {
-                    "sourceVolume": "efs",
-                    "containerPath": "/"
-                }
-            ]
+    }
     }
   ]
   EOF
