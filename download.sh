@@ -5,8 +5,8 @@
 # export URL=$VIDEO_URL
 # fi
 
-youtube-dl -f best "${VIDEO_URL}" -o "youtube-%(title)s-%(id)s.%(ext)s" --restrict-filenames
+youtube-dl -f ${QUALITY} "${VIDEO_URL}" -o "youtube-%(title)s-%(id)s.%(ext)s" --restrict-filenames
 
 export NAME=$(ls youtube*)
 # -e FOLDER eg: testfolder/ note trailing slash required
-aws s3 cp *.mp4 s3://upload.samdowney.com/uploads/${FOLDER}${NAME} ${STORAGE_CLASS}
+aws s3 cp *.mp4 s3://upload.samdowney.com/uploads/${FOLDER}/${NAME} ${STORAGE_CLASS}
